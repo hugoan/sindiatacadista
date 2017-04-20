@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head />
+<h:body>
+
+	<h:form id="formCadEmpresa">
+
+		<p:fieldset legend="Cadastro de Empresa">
+			<h:panelGrid columns="2">
+
+				<p:outputLabel for="razaoSocial" value="Nome" />
+				<p:inputText id="razaoSocial"
+					value="#{empresaBean.empresa.razaoSocial}" />
+
+				<p:outputLabel for="cnpj" value="CNPJ" />
+				<p:inputMask id="cnpj" value="#{empresaBean.empresa.cnpj}"
+					mask="99.999.999/9999-99" />
+
+				<p:outputLabel for="telefone" value="Telefone" />
+				<p:inputMask id="telefone" value="#{empresaBean.empresa.telefone}"
+					mask="(99)9999-9999" />
+
+				<p:outputLabel for="sitAssociacao" value="Associação Ativa?" />
+				<p:selectOneRadio id="sitAssociacao"
+					value="#{empresaBean.empresa.sitAssociacao}">
+					<f:selectItem itemValue="Sim" itemLabel="Sim" />
+					<f:selectItem itemValue="Não" itemLabel="Não" />
+				</p:selectOneRadio>
+
+				<p:commandButton value="Salvar" action="#{empresaBean.cadastrar}"
+					process="@form" update=":@form :formEmpresas:tblEmpresas" />
+
+			</h:panelGrid>
+		</p:fieldset>
+	</h:form>
+
+	<h:form id="formEmpresas">
+		<p:fieldset legend="Empresas">
+			<p:dataTable id="tblEmpresas" var="empresa"
+				value="#{empresaBean.empresas}">
+
+				<p:column headerText="Razão Social">
+					<h:outputText value="#{empresa.razaoSocial}" />
+				</p:column>
+
+				<p:column headerText="CNPJ">
+					<h:outputText value="#{empresa.cnpj}" />
+				</p:column>
+
+				<p:column headerText="Telefone">
+					<h:outputText value="#{empresa.telefone}" />
+				</p:column>
+
+				<p:column headerText="Associada">
+					<h:outputText value="#{empresa.sitAssociacao}" />
+				</p:column>
+
+				<p:column headerText="Ações">
+					<p:commandButton icon="ui-icon-pencil"
+						update=":formCadEmpresa"
+						actionListener="#{empresaBean.carregarNoFormulario(empresa)}" />
+
+					<p:commandButton icon="ui-icon-person"/>
+						
+					<p:commandButton icon="ui-icon-trash"
+						action="#{empresaBean.remover(empresa)}" update="@form" />
+				</p:column>
+
+			</p:dataTable>
+		</p:fieldset>
+	</h:form>
+</h:body>
+</h:html>
