@@ -32,6 +32,9 @@ public class Funcionario {
 	@ManyToOne(optional = false)
 	private Empresa empresa;
 
+	@Column(nullable = false, length = 4)
+	private String ativo;
+
 	public Long getId() {
 		return id;
 	}
@@ -86,5 +89,13 @@ public class Funcionario {
 
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
+	}
+	
+	public String getAtivo() {
+		return ativo;
+	}
+	
+	public void setAtivo(String ativo) {
+		this.ativo = ativo;
 	}
 }

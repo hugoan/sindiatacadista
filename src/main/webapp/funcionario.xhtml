@@ -24,28 +24,95 @@
 					requiredMessage="Informe o CPF" />
 
 				<p:outputLabel for="email" value="E-mail" />
-				<p:inputText id="email" value="#{funcionarioBean.funcionario.email}" />
+				<p:inputText id="email" value="#{funcionarioBean.funcionario.email}"
+					required="true" requiredMessage="Informe o e-mail" />
+
+				<p:outputLabel for="empresa" value="Empresa" />
+				<p:selectOneMenu id="empresa"
+					value="#{funcionarioBean.funcionario.empresa}" style="width:125px"
+					required="true" requiredMessage="Informe o departamento">
+					<f:selectItem noSelectionOption="true" itemLabel="Selecione a empresa" />
+					<f:selectItems value="#{funcionarioBean.empresas}" var="empresa"
+						itemValue="#{empresa}" itemLabel="#{empresa.razaoSocial}" />
+				</p:selectOneMenu>
 
 				<p:outputLabel for="departamento" value="Departamento" />
-				<p:selectOneMenu id="departamento" value="#{funcionarioBean.funcionario.departamento}"
-					style="width:125px" required="true" requiredMessage="Informe o departamento">
+				<p:selectOneMenu id="departamento"
+					value="#{funcionarioBean.funcionario.departamento}"
+					style="width:125px" required="true"
+					requiredMessage="Informe o departamento">
 					<f:selectItem itemLabel="Selecione o departamento" itemValue="" />
 					<f:selectItem itemLabel="Administrativo" itemValue="Administrativo" />
 					<f:selectItem itemLabel="Contabil" itemValue="Contabil" />
 					<f:selectItem itemLabel="RH" itemValue="RH" />
 				</p:selectOneMenu>
-				
-				<p:outputLabel for="funcao" value="Função" />
-				<p:inputText id="funcao" value="#{funcionarioBean.funcionario.funcao}"
-					required="true" requiredMessage="Informe a função" />
 
-				<p:commandButton value="Salvar"
-					action="#{funcionarioBean.cadastrar}" process="@form"
-					update=":@form" />
+				<p:outputLabel for="funcao" value="Função" />
+				<p:inputText id="funcao"
+					value="#{funcionarioBean.funcionario.funcao}" required="true"
+					requiredMessage="Informe a função" />
+
+				<p:outputLabel for="cadastroAtivo" value="Cadastro Ativo" />
+				<p:selectOneRadio id="cadastroAtivo"
+					value="#{funcionarioBean.funcionario.ativo}" required="true"
+					requiredMessage="Informe o estado do cadastrado">
+					<f:selectItem itemValue="Sim" itemLabel="Sim" />
+					<f:selectItem itemValue="Não" itemLabel="Não" />
+				</p:selectOneRadio>
+
+				<p:commandButton value="Salvar" action="#{funcionarioBean.salvar}" />
 
 			</h:panelGrid>
 		</p:fieldset>
 	</h:form>
 
-	</h:body>
+
+	<h:form id="formTblFuncionarios">
+		<p:fieldset legend="Funcionários">
+			<p:dataTable id="tblFuncionarios" var="funcionario"
+				value="#{funcionarioBean.funcionarios}">
+
+				<p:column headerText="Nome">
+					<h:outputText value="#{funcionario.nome}" />
+				</p:column>
+
+				<p:column headerText="CPF">
+					<h:outputText value="#{funcionario.cpf}" />
+				</p:column>
+
+				<p:column headerText="E-mail">
+					<h:outputText value="#{funcionario.email}" />
+				</p:column>
+
+				<p:column headerText="Departamento">
+					<h:outputText value="#{funcionario.departamento}" />
+				</p:column>
+
+				<p:column headerText="Função">
+					<h:outputText value="#{funcionario.funcao}" />
+				</p:column>
+
+				<p:column headerText="Empresa">
+					<h:outputText value="#{funcionario.Empresa.razaoSocial}" />
+				</p:column>
+
+				<p:column headerText="Cadastro Ativo">
+					<h:outputText value="#{funcionario.ativo}" />
+				</p:column>
+
+				<p:column headerText="Ações">
+					<p:commandButton icon="ui-icon-pencil" update=":formCadEmpresa"
+						actionListener="#{empresaBean.carregarNoFormulario(empresa)}" />
+
+					<p:commandButton icon="ui-icon-person" />
+
+					<p:commandButton icon="ui-icon-trash"
+						action="#{empresaBean.remover(empresa)}" update="@form" />
+				</p:column>
+
+			</p:dataTable>
+		</p:fieldset>
+	</h:form>
+
+</h:body>
 </h:html>

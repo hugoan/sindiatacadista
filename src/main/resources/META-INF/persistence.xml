@@ -9,6 +9,7 @@
 		<jta-data-source>java:/sindiatacadista-ds</jta-data-source>
 
 		<class>br.com.sindiatacadista.model.Empresa</class>
+		<class>br.com.sindiatacadista.model.Funcionario</class>
 		
 
 		<properties>

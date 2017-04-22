@@ -22,7 +22,7 @@ public class Empresa {
 	@Column(nullable=false)
 	private String telefone;
 	
-	@Column(nullable=false)
+	@Column(nullable=false, length=4)
 	private String sitAssociacao;
 
 	public Long getId() {
