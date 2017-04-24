@@ -30,16 +30,15 @@
 					required="true" requiredMessage="Informe o e-mail" />
 
 				<p:outputLabel for="empresa" value="Empresa" />
-				<p:selectOneMenu id="empresa" value="#{funcionarioBean.funcionario.empresa}" 
+				<p:selectOneMenu id="empresa" value="#{funcionarioBean.funcionario.empresa}" converter="omnifaces.SelectItemsConverter"
 					style="width:125px" required="true" requiredMessage="Informe o departamento">
 					<f:selectItem noSelectionOption="true" itemLabel="Selecione a empresa" />
 					<f:selectItems value="#{funcionarioBean.empresas}" var="empresa"
-						itemValue="#{empresa.id}" itemLabel="#{empresa.razaoSocial}" />
+						itemValue="#{empresa}" itemLabel="#{empresa.razaoSocial}" />
 				</p:selectOneMenu>
 
 				<p:outputLabel for="departamento" value="Departamento" />
-				<p:selectOneMenu id="departamento"
-					value="#{funcionarioBean.funcionario.departamento}"
+				<p:selectOneMenu id="departamento" value="#{funcionarioBean.funcionario.departamento}"
 					style="width:125px" required="true"
 					requiredMessage="Informe o departamento">
 					<f:selectItem itemLabel="Selecione o departamento" itemValue="" />
