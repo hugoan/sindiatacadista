@@ -9,6 +9,8 @@
 <h:head />
 <h:body>
 
+   <p:growl id="messages" showDetail="true" autoUpdate="true"/>
+
 	<h:form id="formCadFuncionario">
 
 		<p:fieldset legend="Cadastro de Funcionario">
@@ -28,12 +30,11 @@
 					required="true" requiredMessage="Informe o e-mail" />
 
 				<p:outputLabel for="empresa" value="Empresa" />
-				<p:selectOneMenu id="empresa"
-					value="#{funcionarioBean.funcionario.empresa}" style="width:125px"
-					required="true" requiredMessage="Informe o departamento">
+				<p:selectOneMenu id="empresa" value="#{funcionarioBean.funcionario.empresa}" 
+					style="width:125px" required="true" requiredMessage="Informe o departamento">
 					<f:selectItem noSelectionOption="true" itemLabel="Selecione a empresa" />
 					<f:selectItems value="#{funcionarioBean.empresas}" var="empresa"
-						itemValue="#{empresa}" itemLabel="#{empresa.razaoSocial}" />
+						itemValue="#{empresa.id}" itemLabel="#{empresa.razaoSocial}" />
 				</p:selectOneMenu>
 
 				<p:outputLabel for="departamento" value="Departamento" />
@@ -60,7 +61,7 @@
 					<f:selectItem itemValue="Não" itemLabel="Não" />
 				</p:selectOneRadio>
 
-				<p:commandButton value="Salvar" action="#{funcionarioBean.salvar}" />
+				<p:commandButton value="Salvar" action="#{funcionarioBean.salvar}" update="@form"/>
 
 			</h:panelGrid>
 		</p:fieldset>

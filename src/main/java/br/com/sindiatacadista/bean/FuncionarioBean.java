@@ -19,7 +19,8 @@ import br.com.sindiatacadista.model.Funcionario;
 public class FuncionarioBean implements Serializable {
 
 	private Funcionario funcionario = new Funcionario();
-
+	
+	
 	@Inject
 	private FuncionarioDAO funcionarioDAO;
 
@@ -28,6 +29,7 @@ public class FuncionarioBean implements Serializable {
 
 	@Transactional
 	public void salvar(Funcionario funcionario) {
+		System.out.println("O método salvar da classe funcionarioBean recebeu o seguinte funcionario: " + funcionario);
 		if (funcionario.getId() == null) {
 			this.funcionarioDAO.gravar(funcionario);
 		} else {
