@@ -28,7 +28,7 @@ public class FuncionarioDAO implements Serializable {
 	
 	
 	public void remover(Funcionario funcionario){
-		this.em.remove(funcionario);
+		this.em.remove(em.merge(funcionario));
 	}
 	
 	public List<Funcionario> listaTodosFuncionariosDaEmpresa(){

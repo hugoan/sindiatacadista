@@ -43,7 +43,7 @@
 	<h:form id="formEmpresas">
 		<p:fieldset legend="Empresas">
 			<p:dataTable id="tblEmpresas" var="empresa"
-				value="#{empresaBean.empresas}">
+				value="#{empresaBean.empresas}" emptyMessage="Nenhuma empresa cadastrada.">
 
 				<p:column headerText="Razão Social">
 					<h:outputText value="#{empresa.razaoSocial}" />

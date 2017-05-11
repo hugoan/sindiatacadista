@@ -17,17 +17,14 @@ public class EmpresaDAO implements Serializable {
 	private EntityManager em;
 
 	public void gravar(Empresa empresa) {
-		System.out.println("Objeto na entrada do DAO" + empresa);
 		this.em.persist(empresa);
 	}
 
-	//@Transactional
 	public void atualizar(Empresa empresa) {
 		this.em.merge(empresa);
 
 	}
 
-	//@Transactional
 	public void remover(Empresa empresa) {
 		this.em.remove(em.merge(empresa));
 	}

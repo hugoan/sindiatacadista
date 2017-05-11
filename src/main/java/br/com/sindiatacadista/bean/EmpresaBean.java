@@ -15,7 +15,8 @@ import br.com.sindiatacadista.model.Empresa;
 @SuppressWarnings("serial")
 public class EmpresaBean implements Serializable {
 
-	private Empresa empresa = new Empresa();
+	@Inject
+	private Empresa empresa;
 
 	@Inject
 	private EmpresaDAO dao;
@@ -29,13 +30,10 @@ public class EmpresaBean implements Serializable {
 	}
 
 	public void carregarNoFormulario(Empresa empresa) {
-		System.out.println("O id da empresa na hora de carregar no formulário é:" + empresa.getId());
 		this.empresa = empresa;
 	}
 
 	public void salvar() {
-		System.out.println("O id da empresa é: " + empresa.getId());
-
 		if (this.empresa.getId() == null)
 			this.dao.gravar(this.empresa);
 		else {

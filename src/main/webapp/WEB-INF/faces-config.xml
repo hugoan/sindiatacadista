@@ -11,10 +11,4 @@
 		</locale-config>
 	</application>
 	
-<!-- 	<lifecycle> -->
-<!-- 		<phase-listener> -->
-<!-- 			br.com.sindiatacadista.util.Autorizador  -->
-<!-- 		</phase-listener> -->
-<!-- 	</lifecycle> -->
-
 </faces-config>

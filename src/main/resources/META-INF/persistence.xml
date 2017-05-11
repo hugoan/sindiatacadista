@@ -10,6 +10,7 @@
 
 		<class>br.com.sindiatacadista.model.Empresa</class>
 		<class>br.com.sindiatacadista.model.Funcionario</class>
+		<class>br.com.sindiatacadista.model.Usuario</class>
 		
 
 		<properties>

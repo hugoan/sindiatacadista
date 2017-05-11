@@ -18,23 +18,34 @@ import br.com.sindiatacadista.model.Funcionario;
 @SuppressWarnings("serial")
 public class FuncionarioBean implements Serializable {
 
-	private Funcionario funcionario = new Funcionario();
-	
+
+	@Inject
+	private Funcionario funcionario;
 	
 	@Inject
 	private FuncionarioDAO funcionarioDAO;
-
+	
 	@Inject
-	private EmpresaDAO empresaDAO;
+	private EmpresaDAO empresaDAO; 
 
-	@Transactional
-	public void salvar(Funcionario funcionario) {
-		System.out.println("O método salvar da classe funcionarioBean recebeu o seguinte funcionario: " + funcionario);
+	public void carregarNoFormulario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+	
+	public void salvar() {
 		if (funcionario.getId() == null) {
 			this.funcionarioDAO.gravar(funcionario);
 		} else {
 			this.funcionarioDAO.atualizar(funcionario);
 		}
+		
+		this.funcionario = new Funcionario();
+	}
+	
+	@Transactional
+	public void remover(Funcionario funcionario){
+		funcionarioDAO.remover(funcionario);
+		this.funcionario = new Funcionario();
 	}
 
 	// Gets e Sets
@@ -53,4 +64,5 @@ public class FuncionarioBean implements Serializable {
 	public List<Empresa> getEmpresas(){
 		return this.empresaDAO.listaTodasEmpresas();
 	}
+	
 }

@@ -60,7 +60,7 @@
 					<f:selectItem itemValue="Não" itemLabel="Não" />
 				</p:selectOneRadio>
 
-				<p:commandButton value="Salvar" action="#{funcionarioBean.salvar}" update="@form"/>
+				<p:commandButton value="Salvar" action="#{funcionarioBean.salvar}" update="@form :formTblFuncionarios:tblFuncionarios"/>
 
 			</h:panelGrid>
 		</p:fieldset>
@@ -70,7 +70,7 @@
 	<h:form id="formTblFuncionarios">
 		<p:fieldset legend="Funcionários">
 			<p:dataTable id="tblFuncionarios" var="funcionario"
-				value="#{funcionarioBean.funcionarios}">
+				value="#{funcionarioBean.funcionarios}" emptyMessage="Nenhum funcionário cadastrado.">
 
 				<p:column headerText="Nome">
 					<h:outputText value="#{funcionario.nome}" />
@@ -92,26 +92,30 @@
 					<h:outputText value="#{funcionario.funcao}" />
 				</p:column>
 
-				<p:column headerText="Empresa">
-					<h:outputText value="#{funcionario.Empresa.razaoSocial}" />
-				</p:column>
+<!-- 				<p:column headerText="Empresa"> -->
+<!-- 					<h:outputText value="#{funcionario.empresa}" /> -->
+<!-- 				</p:column> -->
 
 				<p:column headerText="Cadastro Ativo">
 					<h:outputText value="#{funcionario.ativo}" />
 				</p:column>
 
 				<p:column headerText="Ações">
-					<p:commandButton icon="ui-icon-pencil" update=":formCadEmpresa"
-						actionListener="#{empresaBean.carregarNoFormulario(empresa)}" />
+					<p:commandButton icon="ui-icon-pencil" actionListener="#{funcionarioBean.carregarNoFormulario(funcionario)}" update=":formCadFuncionario" />
 
-					<p:commandButton icon="ui-icon-person" />
-
-					<p:commandButton icon="ui-icon-trash"
-						action="#{empresaBean.remover(empresa)}" update="@form" />
+					<p:commandButton icon="ui-icon-trash" actionListener="#{funcionarioBean.remover(funcionario)}" update="messages :formTblFuncionarios:tblFuncionarios" >
+						<p:confirm header="Confirmação" message="Tem ceteza que deseja excluir o funcionário?" icon="ui-icon-alert" />
+					</p:commandButton>
 				</p:column>
 
 			</p:dataTable>
 		</p:fieldset>
+				
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				    </p:confirmDialog>
+		
 	</h:form>
 
 </h:body>

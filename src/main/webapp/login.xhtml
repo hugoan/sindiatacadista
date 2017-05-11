@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head />
+<h:body>
+
+	<p:growl id="messages" showDetail="true" autoUpdate="true" />
+
+	<h:form id="formLogin">
+
+		<h:panelGrid columns="2" styleClass="grid-login">
+			<p:outputLabel value="CPF" for="cpf"/>
+			<p:inputMask id="cpf" mask="999.999.999-99" size="20" required="true" requiredMessage="Informe o CPF" />
+
+			<p:outputLabel value="Senha" for="senha" />
+			<p:password size="20" id="senha" maxlength="8" required="true" requiredMessage="Informe a senha"/>
+		</h:panelGrid>
+		
+		<h:panelGrid columns="1">
+			<p:commandButton value="Entrar" update=":messages" />
+		</h:panelGrid>
+
+	</h:form>
+
+
+</h:body>
+</h:html>
