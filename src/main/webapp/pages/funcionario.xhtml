@@ -4,13 +4,16 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags">
 
 <h:head />
 <h:body>
 
    <p:growl id="messages" showDetail="true" autoUpdate="true"/>
-
+   
+   <sec:url var="logoutUrl" value="/logout"/>
+    
 	<h:form id="formCadFuncionario">
 
 		<p:fieldset legend="Cadastro de Funcionario">

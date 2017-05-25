@@ -3,7 +3,7 @@ package br.com.sindiatacadista.bean;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
@@ -14,7 +14,7 @@ import br.com.sindiatacadista.model.Empresa;
 import br.com.sindiatacadista.model.Funcionario;
 
 @Named
-@ViewScoped
+@RequestScoped
 @SuppressWarnings("serial")
 public class FuncionarioBean implements Serializable {
 

@@ -34,4 +34,8 @@ public class FuncionarioDAO implements Serializable {
 	public List<Funcionario> listaTodosFuncionariosDaEmpresa(){
 		return this.em.createQuery("select f from Funcionario f join f.empresa", Funcionario.class).getResultList();
 	}
+	
+	public Funcionario buscaFuncionarioPorCPF(String cpf){
+		return this.em.createQuery("select f from Funcionario f where cpf = '" + cpf + "'", Funcionario.class).getSingleResult();
+	}
 }

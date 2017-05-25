@@ -8,25 +8,20 @@
 
 <h:head />
 <h:body>
-
-	<p:growl id="messages" showDetail="true" autoUpdate="true" />
-
 	<h:form id="formLogin">
-
-		<h:panelGrid columns="2" styleClass="grid-login">
-			<p:outputLabel value="CPF" for="cpf"/>
-			<p:inputMask id="cpf" mask="999.999.999-99" size="20" required="true" requiredMessage="Informe o CPF" />
-
-			<p:outputLabel value="Senha" for="senha" />
-			<p:password size="20" id="senha" maxlength="8" required="true" requiredMessage="Informe a senha"/>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="CPF" for="cpf" />
+			<p:inputMask id="cpf" mask="999.999.999-99" value="#{loginBean.cpf}" 
+				required="true" requiredMessage="Informar o CPF"/>
+			
+			<h:outputLabel value="Senha" for="senha" />
+			<p:password id="senha" value="#{loginBean.usuario.senha}" 
+				required="true" requiredMessage="Informar a senha"/>
+			</h:panelGrid>
+		<h:panelGrid>
+			<h:commandButton value="Iniciar Sessão" action="#{loginBean.iniciaSessao}"/>
 		</h:panelGrid>
-		
-		<h:panelGrid columns="1">
-			<p:commandButton value="Entrar" update=":messages" />
-		</h:panelGrid>
-
 	</h:form>
-
 
 </h:body>
 </h:html>
