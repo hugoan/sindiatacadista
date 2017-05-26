@@ -36,5 +36,6 @@ public class EmpresaDAO implements Serializable {
 	public Empresa buscarPorId(Long id) {
 		return this.em.find(Empresa.class, id);
 	}
+	
 
 }
