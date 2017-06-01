@@ -36,6 +36,11 @@ public class FuncionarioDAO implements Serializable {
 	}
 	
 	public Funcionario buscaFuncionarioPorCPF(String cpf){
+		try{
 		return this.em.createQuery("select f from Funcionario f where cpf = '" + cpf + "'", Funcionario.class).getSingleResult();
+		} catch (RuntimeException erro) {
+			System.out.println("Funcionário não cadastrado no sistema");
+			return null;
+		}
 	}
 }

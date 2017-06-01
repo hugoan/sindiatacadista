@@ -34,8 +34,19 @@ public class EmpresaDAO implements Serializable {
 	}
 
 	public Empresa buscarPorId(Long id) {
-		return this.em.find(Empresa.class, id);
+		try {
+			return this.em.find(Empresa.class, id);
+		} catch (RuntimeException erro) {
+			System.out.println("Empresa não localizada");
+			return null;
+		}
 	}
-	
+
+	public String empresaAtiva(Long id) {
+		Empresa empresa = buscarPorId(id);
+		System.out.println("=== SITUAÇÃO CADASTRAL DA EMPRESA: " + empresa.getSitAssociacao());
+		return empresa.getSitAssociacao();
+
+	}
 
 }

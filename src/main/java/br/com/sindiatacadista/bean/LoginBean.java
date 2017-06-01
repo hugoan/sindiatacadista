@@ -19,13 +19,14 @@ public class LoginBean implements Serializable {
 
 	@Inject
 	private UsuarioDAO usuarioDAO;
-
+	
 	private String cpf;
-
+	
 	public String iniciaSessao() {
-		usuario = usuarioDAO.existe(this.cpf, this.usuario);
-
+		usuario = usuarioDAO.existe(this.cpf, this.usuario.getSenha());
+		
 		System.out.println("Usuário logado é " + usuario.getFuncionario().getNome());
+		
 		
 		return "pages/funcionario?faces-redirect=true";
 //		
@@ -52,5 +53,5 @@ public class LoginBean implements Serializable {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
+	
 }

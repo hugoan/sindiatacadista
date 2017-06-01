@@ -19,28 +19,48 @@ public class UsuarioDAO implements Serializable {
 
 	@Inject
 	private FuncionarioDAO funcionarioDAO;
-	
-	public Usuario existe(String cpf, Usuario usuario) {
+
+	@Inject
+	private Usuario usuario;
+
+	public Usuario existe(String cpf, String senha) {
+
+		// Verifica se existe algum funcionário com o CPF informado
 		Funcionario funcionario = funcionarioDAO.buscaFuncionarioPorCPF(cpf);
+		if (funcionario == null) {
+			return null;
 
-		return usuario = buscaUsuario(usuario, funcionario);
-		
-		// Verifica se usuario existe
-//		if (funcionario != null) {
-//			usuario = buscaUsuario(usuario, funcionario);
-//
-//			System.out.println("Funcionario logado é " + funcionario.getNome());
-//			return usuario;
-//		}
+			// Verifica se funcionário existe como usuário
+		} else {
+			usuario = buscaUsuario(funcionario, senha);
+			if (usuario == null) {
+				return null;
 
-		
+				// Verifica se cadastro da empresa está ativo
+			} else if (funcionario.getEmpresa().getSitAssociacao().equals("Não")) {
+				System.out.println(
+						"Ops... Não deixe de usufruir dos beneficios. Entre em contato com Sindiatacadista para ativar o cadastro da empresa");
+				return null;
 
+				// Verifica se o cadastro do usuário está ativo
+			} else if (funcionario.getAtivo().equals("Não")) {
+				System.out.println("Seu cadastro não está ativo. Entre em contato com o administrator da empresa");
+				return null;
+			}
+			
+			return usuario;
+		}
 	}
 
-	private Usuario buscaUsuario(Usuario usuario, Funcionario funcionario) {
-		return em.createQuery("select u from Usuario u where u.funcionario_id = " + funcionario.getId()
-				+ " and u.senha = '" + usuario.getSenha() + "'", Usuario.class).getSingleResult();
+	private Usuario buscaUsuario(Funcionario funcionario, String senha) {
+		try {
+			return em.createQuery(
+					"select u from Usuario u where u.funcionario =" + funcionario.getId() + "and u.senha = " + senha,
+					Usuario.class).getSingleResult();
+		} catch (RuntimeException erro) {
+			System.out.println("Login ou senha incorredo");
+			return null;
+		}
 	}
 
-	
 }

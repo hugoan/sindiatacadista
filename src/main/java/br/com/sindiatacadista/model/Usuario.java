@@ -22,7 +22,7 @@ public class Usuario implements Serializable {
 
 	@Column(length = 32, nullable = false)
 	private String senha;
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -46,7 +46,7 @@ public class Usuario implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -77,5 +77,5 @@ public class Usuario implements Serializable {
 	    return String.format("%s[id=%d]", getClass().getSimpleName(), getId());
 	}
 	
-
+	
 }
