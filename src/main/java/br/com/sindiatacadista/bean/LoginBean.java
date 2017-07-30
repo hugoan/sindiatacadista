@@ -2,6 +2,7 @@ package br.com.sindiatacadista.bean;
 
 import java.io.Serializable;
 
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -25,16 +26,14 @@ public class LoginBean implements Serializable {
 	public String iniciaSessao() {
 		usuario = usuarioDAO.existe(this.cpf, this.usuario.getSenha());
 		
-		System.out.println("Usuário logado é " + usuario.getFuncionario().getNome());
-		
-		
-		return "pages/funcionario?faces-redirect=true";
-//		
-//		if (usuario != null) {
-//			return "pages/funcionario?faces-redirect=true";
-//		}
-//
-//		return "login?faces-redirect=true";
+		if(usuario != null){
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.getExternalContext().getSessionMap().put("usuarioLogado", this.usuario);
+			return "pages/funcionario?faces-redirect=true";
+		}
+				
+		usuario = new Usuario();
+		return null;
 	}
 
 	// Gets and Sets

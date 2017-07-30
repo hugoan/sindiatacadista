@@ -16,7 +16,6 @@ public class FuncionarioDAO implements Serializable {
 	@PersistenceContext
 	private EntityManager em;
 	
-	
 	public void gravar(Funcionario funcionario) {
 		this.em.persist(funcionario);
 	}
@@ -31,8 +30,8 @@ public class FuncionarioDAO implements Serializable {
 		this.em.remove(em.merge(funcionario));
 	}
 	
-	public List<Funcionario> listaTodosFuncionariosDaEmpresa(){
-		return this.em.createQuery("select f from Funcionario f join f.empresa", Funcionario.class).getResultList();
+	public List<Funcionario> listaTodosFuncionariosDaEmpresa(Funcionario funcionarioLogado){
+		return this.em.createQuery("select f from Funcionario f where empresa = " + funcionarioLogado.getEmpresa().getId()).getResultList();
 	}
 	
 	public Funcionario buscaFuncionarioPorCPF(String cpf){

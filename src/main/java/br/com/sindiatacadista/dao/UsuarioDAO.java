@@ -62,5 +62,4 @@ public class UsuarioDAO implements Serializable {
 			return null;
 		}
 	}
-
 }

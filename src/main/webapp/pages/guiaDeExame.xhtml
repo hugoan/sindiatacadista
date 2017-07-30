@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags">
+
+<h:head />
+<h:body>
+
+   <p:growl id="messages" showDetail="true" autoUpdate="true"/>
+   
+   <sec:url var="logoutUrl" value="/logout"/>
+    
+	<h:form id="formCadGuia">
+
+		<p:fieldset legend="Emissão de Guia para Exame">
+			<h:panelGrid columns="2">
+			
+				<p:outputLabel for="nome" value="Funcionário" />
+				<p:selectOneMenu id="nome" value="#{guiaDeExameBean.guiaDeExame.funcionario}" converter="omnifaces.SelectItemsConverter"
+					style="width:125px" required="true" requiredMessage="Informe o Funcionário">
+					<f:selectItem noSelectionOption="true" itemLabel="Selecione o funcionário" />
+					<f:selectItems value="#{guiaDeExameBean.funcionarios}" var="funcionario"
+						itemValue="#{funcionario}" itemLabel="#{funcionario.nome}" />
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="Função"/>
+				<p:inputText disabled="true" value="#{guiaDeExameBean.guiaDeExame.funcionario.funcao}"/>
+
+				<p:commandButton value="Salvar" />
+
+			</h:panelGrid>
+		</p:fieldset>
+	</h:form>
+
+
+</h:body>
+</h:html>
